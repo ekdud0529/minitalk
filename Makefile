@@ -24,12 +24,12 @@ LIBFT_DIR = ./libft
 MINI_DIR = ./minitalk
 
 SRCS = util.c
-SRCS_SERVER = $(SERVER).c
-SRCS_CLIENT = $(CLIENT).c
+SRCS_SERVER = server.c
+SRCS_CLIENT = client.c
 
-OBJS = $(SRCS:.c=.o)
-OBJS_SERVER = $(SRCS_SERVER:.c=.o)
-OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
+OBJS = $(addprefix $(MINI_DIR)/, $(SRCS:.c=.o))
+OBJS_SERVER = $(addprefix $(MINI_DIR)/, $(SRCS_SERVER:.c=.o))
+OBJS_CLIENT = $(addprefix $(MINI_DIR)/, $(SRCS_CLIENT:.c=.o))
 
 all : $(MINITALK)
 
