@@ -12,10 +12,9 @@
 
 #include "minitalk.h"
 
-char	*ft_charjoin(char const *s, char const ch)
+char	*ft_charjoin(char *s, char ch)
 {
-	size_t	s1_len;
-	size_t	s2_len;
+	size_t	s_len;
 	size_t	index;
 	char	*newstr;
 
@@ -24,10 +23,10 @@ char	*ft_charjoin(char const *s, char const ch)
 	if (!newstr)
 		return (0);
 	index = 0;
-	while (*s1)
+	while (*s)
 	{
-		newstr[index] = *s1;
-		s1++;
+		newstr[index] = *s;
+		s++;
 		index++;
 	}
 	newstr[index++] = ch;
