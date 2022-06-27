@@ -17,7 +17,6 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
-LIBFT = libft
 LIBFT_DIR = ./libft
 LIBFLAGS = -L $(LIBFT_DIR) -lft
 
@@ -38,12 +37,10 @@ ifdef BONUS
 	$(OBJS_CLIENT) = $(OBJS_BONUS_CLIENT)
 endif
 
-all : $(LIBFT) $(SERVER) $(CLIENT)
-
-$(LIBFT) :
-	make --directory=$(LIBFT_DIR)
+all : $(SERVER) $(CLIENT)
 
 $(SERVER) : $(OBJS_SERVER)
+	make --directory=$(LIBFT_DIR)
 	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@
 
 $(CLIENT) : $(OBJS_CLIENT)
