@@ -38,7 +38,7 @@ $(SERVER) : $(OBJS_SERVER)
 $(CLIENT) : $(OBJS_CLIENT)
 	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@
 
-$(MINITALK) : $(SERVER) $(CLIENT)
+$(MINITALK) : $(LIBFT) $(SERVER) $(CLIENT)
 
 clean :
 	make clean --directory=$(LIBFT_DIR)
