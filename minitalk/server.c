@@ -12,6 +12,33 @@
 
 #include "minitalk.h"
 
+static char	*msg;
+
+void	handler(int signum, siginfo_t *info, void *context)
+{
+	static char	ch = '\0';
+	static int	index = 7;
+
+	(void)info;
+	(void)context;
+	if (signum == SIGUSR1)
+		ch |= (1 << index--);
+	else if(signum == SIGUSR2)
+		index--;
+	if (index == 0)
+	{
+		if(ch == '\0')
+		{
+			ft_putstr_fd(msg, 1);
+			free(msg);
+		}
+		else
+			msg = ft_charjoin(msg, ch);
+		index = 7;
+		ch = '\0';
+	}
+}
+
 static void	ft_server()
 {
 	struct sigaction	sig;
@@ -35,6 +62,7 @@ int	main(int argc, char **argv)
 	if (argc != 1)
 	{
 		ft_putstr_fd("Error argument count", 1);
+		exit(1);
 	}
 
 	ft_putstr_fd("Server PID : ", 1);
@@ -44,8 +72,6 @@ int	main(int argc, char **argv)
 	ft_server();
 
 	while (1)
-	{
 		pause();
-	}
 	return (0);
 }

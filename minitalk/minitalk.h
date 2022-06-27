@@ -18,4 +18,6 @@
 # include <stdlib.h>
 # include "libft.h"
 
+char	*ft_charjoin(char const *s, char const ch);
+
 #endif
