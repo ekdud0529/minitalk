@@ -17,9 +17,6 @@ CLIENT = client
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-AR = ar -rcs
-RM = rm -rf
-
 LIBFT_DIR = ./libft
 MINI_DIR = ./minitalk
 
@@ -39,12 +36,12 @@ all : $(MINITALK)
 $(SERVER) : $(OBJS_SERVER) $(OBJS)
 	$(MAKE) bonus -C $(LIBFT_DIR)
 	cp $(LIBFT_DIR)/libft.a $(SERVER)
-	$(AR) $(NAME) $(OBJS_SERVER) $(OBJS)
+	$(CC) $(CFLAGS) -I./$(LIBFT_DIR)$^ -o $@
 
 $(CLIENT) : $(OBJS_CLIENT) $(OBJS)
 	$(MAKE) bonus -C $(LIBFT_DIR)
 	cp $(LIBFT_DIR)/libft.a $(CLIENT)
-	$(AR) $(NAME) $(OBJS_CLIENT) $(OBJS)
+	$(CC) $(CFLAGS) -I./$(LIBFT_DIR)$^ -o $@
 
 $(MINITALK) : $(SERVER) $(CLIENT)
 
