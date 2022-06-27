@@ -14,6 +14,29 @@
 
 static char	*msg;
 
+char	*ft_charjoin(char *s, char ch)
+{
+	size_t	s_len;
+	size_t	index;
+	char	*newstr;
+
+	s_len = ft_strlen(s);
+	newstr = (char *)malloc(sizeof(char) * (s_len + 2));
+	if (!newstr)
+		return (0);
+	index = 0;
+	while (*s)
+	{
+		newstr[index] = *s;
+		s++;
+		index++;
+	}
+	newstr[index++] = ch;
+	newstr[index] = '\0';
+	free(s);
+	return (newstr);
+}
+
 void	handler(int signum, siginfo_t *info, void *context)
 {
 	static char	ch = '\0';

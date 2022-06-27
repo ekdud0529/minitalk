@@ -10,15 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
 # include <sys/types.h>
 # include "./libft/libft.h"
-
-char	*ft_charjoin(char *s, char ch);
 
 #endif
