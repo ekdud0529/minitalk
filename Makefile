@@ -19,7 +19,7 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 LIBFT_DIR = ./libft
-LIBFLAGS = -L./libft -lft
+LIBFLAGS = -L ./libft -lft
 
 SRCS_SERVER = server.c util.c
 SRCS_CLIENT = client.c util.c
@@ -29,12 +29,13 @@ OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
 
 all : $(MINITALK)
 
-$(SERVER) : $(OBJS_SERVER)
+$(LIBFT) :
 	make --directory=$(LIBFT_DIR)
+
+$(SERVER) : $(OBJS_SERVER)
 	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@
 
 $(CLIENT) : $(OBJS_CLIENT)
-	make --directory=$(LIBFT_DIR)
 	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@
 
 $(MINITALK) : $(SERVER) $(CLIENT)
