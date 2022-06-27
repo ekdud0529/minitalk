@@ -69,7 +69,6 @@ int	main(int argc, char *argv[])
 	ft_putstr_fd("Client PID : ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
-
 	ft_client(ft_atoi(argv[1]), argv[2]);
 	return (0);
 }

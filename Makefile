@@ -16,41 +16,36 @@ CLIENT = client
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+RM = rm -rf
 
 LIBFT_DIR = ./libft
+LIBFLAGS = -L./libft -lft
 MINI_DIR = ./minitalk
 
-SRCS = util.c
-SRCS_SERVER = server.c
-SRCS_CLIENT = client.c
+SRCS_SERVER = server.c util.c
+SRCS_CLIENT = client.c util.c
 
-OBJS = $(addprefix $(MINI_DIR)/, $(SRCS:.c=.o))
 OBJS_SERVER = $(addprefix $(MINI_DIR)/, $(SRCS_SERVER:.c=.o))
 OBJS_CLIENT = $(addprefix $(MINI_DIR)/, $(SRCS_CLIENT:.c=.o))
 
 all : $(MINITALK)
 
-.c.o :
-	$(CC) $(CFLAGS) -I./$(MINI_DIR) -c -o $@ $<
+$(SERVER) : $(OBJS_SERVER)
+	make --directory=$(LIBFT_DIR)
+	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@
 
-$(SERVER) : $(OBJS_SERVER) $(OBJS)
-	$(MAKE) bonus -C $(LIBFT_DIR)
-	cp $(LIBFT_DIR)/libft.a $(SERVER)
-	$(CC) $(CFLAGS) -I./$(LIBFT_DIR)$^ -o $@
-
-$(CLIENT) : $(OBJS_CLIENT) $(OBJS)
-	$(MAKE) bonus -C $(LIBFT_DIR)
-	cp $(LIBFT_DIR)/libft.a $(CLIENT)
-	$(CC) $(CFLAGS) -I./$(LIBFT_DIR)$^ -o $@
+$(CLIENT) : $(OBJS_CLIENT)
+	make --directory=$(LIBFT_DIR)
+	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@
 
 $(MINITALK) : $(SERVER) $(CLIENT)
 
 clean :
-	$(MAKE) -C $(LIBFT_DIR) clean
-	$(RM) $(OBJS_CLIENT) $(OBJS_SERVER) $(OBJS)
+	make clean --directory=$(LIBFT_DIR)
+	$(RM) $(OBJS_CLIENT) $(OBJS_SERVER)
 
 fclean :
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	make fclean --directory=$(LIBFT_DIR)
 	$(RM) $(CLIENT) $(SERVER)
 
 re : fclean all
