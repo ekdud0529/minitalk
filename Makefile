@@ -21,6 +21,7 @@ AR = ar -rcs
 RM = rm -rf
 
 LIBFT_DIR = ./libft
+MINI_DIR = ./minitalk
 
 SRCS = util.c
 SRCS_SERVER = $(SERVER).c
@@ -33,7 +34,7 @@ OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
 all : $(MINITALK)
 
 .c.o :
-	$(CC) $(CFLAGS) -C -O $@ $<
+	$(CC) $(CFLAGS) -I./$(MINI_DIR) -c -o $@ $<
 
 $(SERVER) : $(OBJS_SERVER) $(OBJS)
 	$(MAKE) bonus -C $(LIBFT_DIR)
@@ -44,6 +45,8 @@ $(CLIENT) : $(OBJS_CLIENT) $(OBJS)
 	$(MAKE) bonus -C $(LIBFT_DIR)
 	cp $(LIBFT_DIR)/libft.a $(CLIENT)
 	$(AR) $(NAME) $(OBJS_CLIENT) $(OBJS)
+
+$(MINITALK) : $(SERVER) $(CLIENT)
 
 clean :
 	$(MAKE) -C $(LIBFT_DIR) clean
