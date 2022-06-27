@@ -61,7 +61,9 @@ int	main(int argc, char *argv[])
 {
 	if (argc != 1)
 	{
-		ft_putstr_fd("Error argument count", 1);
+		ft_putstr_fd("Error ", 1);
+		ft_putstr_fd(argv[0], 1);
+		ft_putchar_fd('\n', 1);
 		exit(1);
 	}
 
