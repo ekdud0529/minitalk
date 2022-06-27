@@ -20,7 +20,6 @@ RM = rm -rf
 LIBFT = libft
 LIBFT_DIR = ./libft
 LIBFLAGS = -L $(LIBFT_DIR) -lft
-INC_FLAGS = -I includes -I $(LIBFT)
 
 MINI_DIR = ./minitalk
 SRCS_SERVER = server.c
