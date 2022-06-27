@@ -17,7 +17,7 @@
 # include <signal.h>
 # include <stdlib.h>
 # include <sys/types.h>
-# include "../libft/libft.h"
+# include "./libft/libft.h"
 
 char	*ft_charjoin(char *s, char ch);
 
