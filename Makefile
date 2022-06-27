@@ -20,13 +20,12 @@ RM = rm -rf
 
 LIBFT_DIR = ./libft
 LIBFLAGS = -L./libft -lft
-MINI_DIR = ./minitalk
 
 SRCS_SERVER = server.c util.c
 SRCS_CLIENT = client.c util.c
 
-OBJS_SERVER = $(addprefix $(MINI_DIR)/, $(SRCS_SERVER:.c=.o))
-OBJS_CLIENT = $(addprefix $(MINI_DIR)/, $(SRCS_CLIENT:.c=.o))
+OBJS_SERVER = $(SRCS_SERVER:.c=.o)
+OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
 
 all : $(MINITALK)
 
@@ -44,7 +43,7 @@ clean :
 	make clean --directory=$(LIBFT_DIR)
 	$(RM) $(OBJS_CLIENT) $(OBJS_SERVER)
 
-fclean :
+fclean :clean
 	make fclean --directory=$(LIBFT_DIR)
 	$(RM) $(CLIENT) $(SERVER)
 
