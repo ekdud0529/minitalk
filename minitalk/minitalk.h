@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
-# include "libft.h"
+# include "../libft/libft.h"
 
 char	*ft_charjoin(char const *s, char const ch);
 

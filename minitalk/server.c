@@ -57,7 +57,7 @@ static void	ft_server()
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char *argv[])
 {
 	if (argc != 1)
 	{
@@ -67,7 +67,7 @@ int	main(int argc, char **argv)
 
 	ft_putstr_fd("Server PID : ", 1);
 	ft_putnbr_fd(getpid(), 1);
-	ft_putchar_fd("\n", 1);
+	ft_putchar_fd('\n', 1);
 
 	ft_server();
 
