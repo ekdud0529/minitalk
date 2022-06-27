@@ -25,7 +25,7 @@ void	send_bit(int pid, int c)
 	usleep(100);
 }
 
-void	char_to_bit(int pid, int c, int cnt)
+void	char_to_bit(int pid, int c)
 {
 	int	index;
 
@@ -48,7 +48,7 @@ void	ft_client(int pid, char *msg)
 	last = 7;
 	while (msg[index])
 	{
-		char_to_bit(pid, msg[index], 0);
+		char_to_bit(pid, msg[index]);
 		index++;
 	}
 	send_bit(pid, 0);
