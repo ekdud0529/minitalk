@@ -29,8 +29,8 @@ void	char_to_bit(int pid, int c)
 {
 	int	index;
 
-	index = 7;
-	while (index--)
+	index = 8;
+	while (--index >= 0)
 	{
 		if ((c & (1 << index)) == 0)
 			send_bit(pid, 0);
@@ -49,13 +49,15 @@ void	ft_client(int pid, char *msg)
 	{
 		char_to_bit(pid, msg[index]);
 		index++;
+		ft_putnbr_fd(index, 1);
+		write(1, "\n", 1);
 	}
-	index = 7;
+	index = 8;
 	while (index--)
 	{
 		send_bit(pid, 0);
 	}
-	ft_putstr_fd("Sent to MSG\n", 1);
+	ft_putstr_fd("Send MSG to SERVER\n", 1);
 }
 
 int	main(int argc, char *argv[])

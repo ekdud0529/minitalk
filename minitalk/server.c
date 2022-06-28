@@ -41,13 +41,13 @@ char	*ft_charjoin(char *s, char ch)
 void	handler(int signum, siginfo_t *info, void *context)
 {
 	static char	ch = '\0';
-	static int	index = 7;
+	static int	index = 8;
 
 	(void)context;
 	if (signum == SIGUSR1)
 		ch |= (1 << --index);
 	else if (signum == SIGUSR2)
-		index--;
+		--index;
 	if (index == 0)
 	{
 		if (ch == '\0')
@@ -61,12 +61,12 @@ void	handler(int signum, siginfo_t *info, void *context)
 		}
 		else
 			msg = ft_charjoin(msg, ch);
-		index = 7;
+		index = 8;
 		ch = '\0';
 	}
 }
 
-static void	ft_server()
+static void	ft_server(void)
 {
 	struct sigaction	sig;
 
