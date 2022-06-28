@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
+#include <stdio.h>
 static char	*msg;
 
 char	*ft_charjoin(char *s, char ch)
@@ -20,15 +20,16 @@ char	*ft_charjoin(char *s, char ch)
 	size_t	index;
 	char	*newstr;
 
+	if (!s)
+		return (0);
 	s_len = ft_strlen(s);
-	newstr = (char *)malloc(sizeof(char) * (s_len + 2));
+	newstr = (char *)malloc(sizeof(char) * (s_len + 1));
 	if (!newstr)
 		return (0);
 	index = 0;
-	while (*s)
+	while (s[index])
 	{
-		newstr[index] = *s;
-		s++;
+		newstr[index] = s[index];
 		index++;
 	}
 	newstr[index++] = ch;
@@ -42,18 +43,21 @@ void	handler(int signum, siginfo_t *info, void *context)
 	static char	ch = '\0';
 	static int	index = 7;
 
-	(void)info;
 	(void)context;
 	if (signum == SIGUSR1)
-		ch |= (1 << index--);
-	else if(signum == SIGUSR2)
+		ch |= (1 << --index);
+	else if (signum == SIGUSR2)
 		index--;
 	if (index == 0)
 	{
-		if(ch == '\0')
+		if (ch == '\0')
 		{
+			ft_putnbr_fd(info->si_pid, 1);
+			ft_putstr_fd(" : ", 1);
 			ft_putstr_fd(msg, 1);
+			ft_putchar_fd('\n', 1);
 			free(msg);
+			msg = ft_strdup("");
 		}
 		else
 			msg = ft_charjoin(msg, ch);
@@ -70,12 +74,12 @@ static void	ft_server()
 	sig.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &sig, NULL) != 0)
 	{
-		ft_putstr_fd("SIGUSR1 Error", 1);
+		ft_putstr_fd("SIGUSR1 sigaction Error", 1);
 		exit(1);
 	}
 	if (sigaction(SIGUSR2, &sig, NULL) != 0)
 	{
-		ft_putstr_fd("SIGUSR2 Error", 1);
+		ft_putstr_fd("SIGUSR2 sigaction Error", 1);
 		exit(1);
 	}
 }
@@ -89,13 +93,11 @@ int	main(int argc, char *argv[])
 		ft_putchar_fd('\n', 1);
 		exit(1);
 	}
-
 	ft_putstr_fd("Server PID : ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
-
 	ft_server();
-
+	msg = ft_strdup("");
 	while (1)
 		pause();
 	return (0);
