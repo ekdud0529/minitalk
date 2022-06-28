@@ -39,13 +39,13 @@ ifdef BONUS
 	OBJECTS_CLIENT = $(OBJS_BONUS_CLIENT)
 else
 	OBJECTS_SERVER = $(OBJS_SERVER)
-	OBJECTS_CLIENT = $(OBJS_BONUS_CLIENT)
+	OBJECTS_CLIENT = $(OBJS_CLIENT)
 endif
 
 all : $(SERVER) $(CLIENT)
 
 $(SERVER) : $(OBJECTS_SERVER)
-	make --directory=$(LIBFT_DIR)
+	make --silent --directory=$(LIBFT_DIR)
 	$(CC) $(CFLAGS) $(LIBFLAGS) $(INCFLAGS) $^ -o $@
 
 $(CLIENT) : $(OBJECTS_CLIENT)
