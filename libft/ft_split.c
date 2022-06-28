@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int		get_word_cnt(char *str, char c);
+static int	get_word_cnt(char *str, char c);
 static char	*ft_mk_str(int start, int end, char *str);
 static void	str_free(char **str, int index);
 static void	mk_word(char **str, char *s, char c);

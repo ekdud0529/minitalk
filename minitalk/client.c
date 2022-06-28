@@ -37,7 +37,7 @@ void	char_to_bit(int pid, int c)
 		else
 			send_bit(pid, 1);
 	}
-	usleep(100);
+	usleep(1000);
 }
 
 void	ft_client(int pid, char *msg)
@@ -49,8 +49,6 @@ void	ft_client(int pid, char *msg)
 	{
 		char_to_bit(pid, msg[index]);
 		index++;
-		ft_putnbr_fd(index, 1);
-		write(1, "\n", 1);
 	}
 	index = 8;
 	while (index--)

@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <stdio.h>
-static char	*msg;
+
+static char	*g_msg;
 
 char	*ft_charjoin(char *s, char ch)
 {
@@ -54,13 +54,13 @@ void	handler(int signum, siginfo_t *info, void *context)
 		{
 			ft_putnbr_fd(info->si_pid, 1);
 			ft_putstr_fd(" : ", 1);
-			ft_putstr_fd(msg, 1);
+			ft_putstr_fd(g_msg, 1);
 			ft_putchar_fd('\n', 1);
-			free(msg);
-			msg = ft_strdup("");
+			free(g_msg);
+			g_msg = ft_strdup("");
 		}
 		else
-			msg = ft_charjoin(msg, ch);
+			g_msg = ft_charjoin(g_msg, ch);
 		index = 8;
 		ch = '\0';
 	}
@@ -97,7 +97,7 @@ int	main(int argc, char *argv[])
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
 	ft_server();
-	msg = ft_strdup("");
+	g_msg = ft_strdup("");
 	while (1)
 		pause();
 	return (0);
