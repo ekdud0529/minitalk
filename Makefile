@@ -32,22 +32,27 @@ SRCS_BONUS_CLIENT = client_bonus.c
 OBJS_BONUS_SERVER = $(addprefix $(BONUS_DIR)/, $(SRCS_BONUS_SERVER:.c=.o))
 OBJS_BONUS_CLIENT = $(addprefix $(BONUS_DIR)/, $(SRCS_BONUS_CLIENT:.c=.o))
 
+INCFLAGS = -I./minitalk -I./libft
+
 ifdef BONUS
-	$(OBJS_SERVER) = $(OBJS_BONUS_SERVER)
-	$(OBJS_CLIENT) = $(OBJS_BONUS_CLIENT)
+	OBJECTS_SERVER = $(OBJS_BONUS_SERVER)
+	OBJECTS_CLIENT = $(OBJS_BONUS_CLIENT)
+else
+	OBJECTS_SERVER = $(OBJS_SERVER)
+	OBJECTS_CLIENT = $(OBJS_BONUS_CLIENT)
 endif
 
 all : $(SERVER) $(CLIENT)
 
-$(SERVER) : $(OBJS_SERVER)
+$(SERVER) : $(OBJECTS_SERVER)
 	make --directory=$(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@ -I./minitalk -I./libft
+	$(CC) $(CFLAGS) $(LIBFLAGS) $(INCFLAGS) $^ -o $@
 
-$(CLIENT) : $(OBJS_CLIENT)
-	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@ -I./minitalk -I./libft
+$(CLIENT) : $(OBJECTS_CLIENT)
+	$(CC) $(CFLAGS) $(LIBFLAGS) $(INCFLAGS) $^ -o $@
 
 bonus :
-	make BONUS=true
+	make BONUS=1
 
 clean :
 	make clean --directory=$(LIBFT_DIR)
@@ -59,4 +64,4 @@ fclean :clean
 
 re : fclean all
 
-.PHONY : all clean fclean re libft
+.PHONY : all clean fclean re
