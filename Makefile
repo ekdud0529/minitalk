@@ -46,10 +46,10 @@ all : $(SERVER) $(CLIENT)
 
 $(SERVER) : $(OBJECTS_SERVER)
 	make --silent --directory=$(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(LIBFLAGS) $(INCFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBFLAGS) $(INCFLAGS)
 
 $(CLIENT) : $(OBJECTS_CLIENT)
-	$(CC) $(CFLAGS) $(LIBFLAGS) $(INCFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBFLAGS) $(INCFLAGS)
 
 bonus :
 	make BONUS=1
