@@ -22,7 +22,7 @@ void	send_bit(int pid, int c)
 	{
 		kill(pid, SIGUSR2);
 	}
-	usleep(100);
+	usleep(1000);
 }
 
 void	char_to_bit(int pid, int c)
