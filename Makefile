@@ -41,17 +41,17 @@ all : $(SERVER) $(CLIENT)
 
 $(SERVER) : $(OBJS_SERVER)
 	make --directory=$(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@ -I./minitalk -I./libft
 
 $(CLIENT) : $(OBJS_CLIENT)
-	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $(LIBFLAGS) $^ -o $@ -I./minitalk -I./libft
 
 bonus :
 	make BONUS=true
 
 clean :
 	make clean --directory=$(LIBFT_DIR)
-	$(RM) $(OBJS_CLIENT) $(OBJS_SERVER)
+	$(RM) $(OBJS_CLIENT) $(OBJS_SERVER) $(OBJS_BONUS_CLIENT) $(OBJS_BONUS_SERVER)
 
 fclean :clean
 	make fclean --directory=$(LIBFT_DIR)
