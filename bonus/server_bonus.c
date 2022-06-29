@@ -12,32 +12,6 @@
 
 #include "minitalk_bonus.h"
 
-static char	*g_msg;
-
-char	*ft_charjoin(char *s, char ch)
-{
-	size_t	s_len;
-	size_t	index;
-	char	*newstr;
-
-	if (!s)
-		return (0);
-	s_len = ft_strlen(s);
-	newstr = (char *)malloc(sizeof(char) * (s_len + 2));
-	if (!newstr)
-		return (0);
-	index = 0;
-	while (s[index])
-	{
-		newstr[index] = s[index];
-		index++;
-	}
-	newstr[index++] = ch;
-	newstr[index] = '\0';
-	free(s);
-	return (newstr);
-}
-
 void	handler(int signum, siginfo_t *info, void *context)
 {
 	static char	ch = '\0';
@@ -52,15 +26,12 @@ void	handler(int signum, siginfo_t *info, void *context)
 	{
 		if (ch == '\0')
 		{
+			ft_putstr_fd("	[Client PID : ", 1);
 			ft_putnbr_fd(info->si_pid, 1);
-			ft_putstr_fd(" : ", 1);
-			ft_putstr_fd(g_msg, 1);
-			ft_putchar_fd('\n', 1);
-			free(g_msg);
-			g_msg = ft_strdup("");
+			ft_putstr_fd("]\n", 1);
 		}
 		else
-			g_msg = ft_charjoin(g_msg, ch);
+			ft_putchar_fd(ch, 1);
 		index = 8;
 		ch = '\0';
 	}
@@ -97,7 +68,6 @@ int	main(int argc, char *argv[])
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
 	ft_server();
-	g_msg = ft_strdup("");
 	while (1)
 		pause();
 	return (0);
